@@ -6,12 +6,14 @@
 #define grid[width][height]
 
 int x, y, fruit, gameOver, key, score; //x and y are for the starting coords of the snake
-int tailLen = 3; //I always have seen the tail initialized to three so why not
+int tailLen = 3; //I always have seen the tail initialized to three in the games, so why not
 
 void setUp(){
+    //find starting point
     x = width / 2; 
     y = height / 2;
-    gameOver = 0;
+    gameOver = 0; //initialize gameOver to false, which will later be true
+    
 }
 
 int main(int argc, char* argv[]){
