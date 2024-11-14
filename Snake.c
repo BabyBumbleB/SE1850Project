@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define width
-#define height
+#define width = 20 
+#define height = 20
 
 int x, y, fruit, gameOver, key, score; 
 int tailLen = 3; 
