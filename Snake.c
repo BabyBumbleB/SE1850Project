@@ -1,12 +1,17 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <ncurses.h>
 
 #define width 20 
 #define height 20
-#define grid[width][height]
+
 
 int x, y, fruit, gameOver, key, score; //x and y are for the starting coords of the snake
 int tailLen = 3; //I always have seen the tail initialized to three in the games, so why not
+
+void plotMap(void);
+void setUp(void);
+
 
 void setUp(){
     //find starting point
@@ -17,6 +22,9 @@ void setUp(){
 }
 
 void plotMap(){ // README: Fix Map using N Curses? Use Draw function and change the fixed variables to width and height.
+    
+    char grid[width][height];
+    
     for (int i = 0; i < 20; i++) //Row
         {
           for (int j = 0; j < 20; j++) //Col
@@ -57,5 +65,5 @@ void plotMap(){ // README: Fix Map using N Curses? Use Draw function and change 
 }
 
 int main(int argc, char* argv[]){
-    
+    setUp();
 }
