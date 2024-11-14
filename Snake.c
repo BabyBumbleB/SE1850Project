@@ -18,20 +18,41 @@ void setUp(){
 
 int main(int argc, char* argv[]){
     //Intalize Grid
-    for (int i = 0; i < width; i++)
+    //Empty Space
+    for (int i = 0; i < 20; i++) //Row
         {
-           for (int j = 0; j < height; j++)
+          for (int j = 0; j < 20; j++) //Col
+              {
+                    grid[i][j] = '.';
+              }
+        }
+    
+    //Intalize Top Border
+    for (int i = 0; i < 1; i++) //Row
+        {
+           for (int j = 0; j < 20; j++) //Col
                {
-                    grid[i][j] = 0;
+                    grid[i][j] = '-';
+               }
+        }
+        
+    
+        
+    //Intalize Bottom Border
+    for (int i = 19; i < 20; i++)
+        {
+           for (int j = 0; j < 20; j++)
+               {
+                    grid[i][j] = '-';
                }
         }
         
     //Print map
-    for (int i = 0; i < width; i++)
+    for (int i = 0; i < 20; i++)
         {
-           for (int j = 0; j < height; j++)
+           for (int j = 0; j < 20; j++)
                {
-                    printf("%d", grid[i][j]);
+                    printf(" %c ", grid[i][j]);
                }
                printf("\n");
         }
