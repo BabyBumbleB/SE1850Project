@@ -9,7 +9,9 @@ int x, y, fruit, gameOver, key, score; //x and y are for the starting coords of 
 int tailLen = 3; //I always have seen the tail initialized to three so why not
 
 void setUp(){
-    
+    x = width / 2; 
+    y = height / 2;
+    gameOver = 0;
 }
 
 int main(int argc, char* argv[]){
