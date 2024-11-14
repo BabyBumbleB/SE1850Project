@@ -15,11 +15,22 @@ void setUp(){
 }
 
 int main(int argc, char* argv[]){
-    for(int i = 0; i < width; i++)
+    //Intalize Grid
+    for (int i = 0; i < width; i++)
         {
-           for (j = 0; j < height; j++)
+           for (int j = 0; j < height; j++)
                {
-                    printf("%d\n". grid[i][j]);
+                    grid[i][j] = 0;
                }
+        }
+        
+    //Print map
+    for (int i = 0; i < width; i++)
+        {
+           for (int j = 0; j < height; j++)
+               {
+                    printf("%d", grid[i][j]);
+               }
+               printf("\n");
         }
 }
