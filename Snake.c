@@ -13,12 +13,10 @@ void setUp(){
     x = width / 2; 
     y = height / 2;
     gameOver = 0; //initialize gameOver to false, which will later be true
-    
+    plotMap();
 }
 
-int main(int argc, char* argv[]){
-    //Intalize Grid
-    //Empty Space
+void plotMap(){
     for (int i = 0; i < 20; i++) //Row
         {
           for (int j = 0; j < 20; j++) //Col
@@ -56,4 +54,8 @@ int main(int argc, char* argv[]){
                }
                printf("\n");
         }
+}
+
+int main(int argc, char* argv[]){
+    
 }
