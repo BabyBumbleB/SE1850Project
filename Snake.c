@@ -16,7 +16,7 @@ void setUp(){
     plotMap();
 }
 
-void plotMap(){
+void plotMap(){ // README: Fix Map using N Curses? Use Draw function and change the fixed variables to width and height.
     for (int i = 0; i < 20; i++) //Row
         {
           for (int j = 0; j < 20; j++) //Col
