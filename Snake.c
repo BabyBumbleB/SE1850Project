@@ -5,33 +5,26 @@
 #define width 20
 #define height 20
 
-int x = 0, y = 0, fruit; 
-int gameOver;
+int x, y, fruitx, fruity, gameOver;
 
-int snakeLen;
+int snakeLen, snakeLenx, snakeLeny;
 
-
-
-
-
-
-void setup(){ // Intailzize
+void setup()
+{ 
     //find starting point
-    
+
     snakeLen = 1;
     x = width / 2; 
     y = height / 2;
     
     gameOver = 0; //initialize gameOver to false, which will later be true
-    
 }
 
 void draw(){ // Runs per frame README: Fix Map using N Curses? Use Draw function and change the fixed variables to width and height.
     char grid[width][height];
     for (int i = 0; i < width; i++) // Row
         {
-        
-          for (int j = 0; j < height; j++) // Col
+            for (int j = 0; j < height; j++) // Col
             {
                 grid[i][j] = '.'; // No Idea why this works
                 
@@ -46,22 +39,9 @@ void draw(){ // Runs per frame README: Fix Map using N Curses? Use Draw function
                 if(i == x && j == y){ // Spawn point middle
                     grid[x][y] = 'O';
                 }
-
-
-
-
-                
             }
         }
-
-   
-        
-        
-    
-        
-    
-        
-    //Print map
+ 
     for (int i = 0; i < 20; i++)
         {
            for (int j = 0; j < 20; j++)
@@ -95,7 +75,7 @@ void input()
 
 void logic()
 {
-    
+
 }
 
 int main(int argc, char* argv[]){
