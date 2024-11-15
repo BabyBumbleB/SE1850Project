@@ -13,7 +13,7 @@ void setup()
 { 
     //find starting point
 
-    snakeLen = 1;
+    snakeLen = 3;
     x = width / 2; 
     y = height / 2;
     
