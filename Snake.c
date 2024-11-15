@@ -32,7 +32,7 @@ void draw(){ // Runs per frame README: Fix Map using N Curses? Use Draw function
                     grid[i][j] = '-';
                 }
 
-                if(i == i && j == 0 || j == width - 1){ // Left Border or right border
+                if(j == 0 || j == width - 1){ // Left Border or right border
                     grid[i][j] = '|';
                 }
 
