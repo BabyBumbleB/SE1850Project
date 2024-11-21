@@ -11,7 +11,7 @@ int snakeLen, snakeLenx, snakeLeny;
 
 void setup()
 { 
-    //find starting point
+    //find starting point and initialize snakes starting length to three, so that it's not just a head
 
     snakeLen = 3;
     x = width / 2; 
