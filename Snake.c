@@ -70,6 +70,8 @@ void input()
         case 'd':
             //d
             break;
+        default: 
+            break;
     }
 }
 
