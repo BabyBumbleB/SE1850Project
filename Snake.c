@@ -97,8 +97,9 @@ void logic() //this function is mainly meant to store the current location of th
 //use array to store the previous data values of the snake's tail, and then we can make a flag to check if the snake is moving only one square at a time by referencing two values in the array that are one index apart, 
     //subtracting them
 }
-
+//include a score system, maybe add 10 points for each fruit.
 int main(int argc, char* argv[]){
     setup();
     draw();
+    logic();
 }
