@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <ncurses.h>
+#include <ncurses.h> //remember to do -lncurses when compiling or running, i forgor which one :skull:
 
 #define width 20
 #define height 20
@@ -75,7 +75,7 @@ void input()
     }
 }
 
-void logic()
+void logic() //this function is mainly meant to store the current location of the snake's head and tail in the corresponding arrays, and then update their locations 
 {
     int prevX = snakeTailX[0];
     int prevY = snakeTailY[0];
