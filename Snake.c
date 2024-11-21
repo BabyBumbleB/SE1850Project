@@ -6,7 +6,7 @@
 #define height 20
 
 int x, y, fruitx, fruity, gameOver;
-
+int snakeTailX[100], snakeTailY[100];
 int snakeLen, snakeLenx, snakeLeny;
 
 void setup()
@@ -77,6 +77,23 @@ void input()
 
 void logic()
 {
+    int prevX = snakeTailX[0];
+    int prevY = snakeTailY[0];
+    int prev2X, prev2Y;
+    snakeTailX[0] = x;
+    snakeTailY[0] = y;
+    
+    for (int i = 1; i < snakeTailLen; i++) {
+        prev2X = snakeTailX[i];
+        prev2Y = snakeTailY[i];
+        snakeTailX[i] = prevX;
+        snakeTailY[i] = prevY;
+        prevX = prev2X;
+        prevY = prev2Y;
+}
+
+
+    
 //use array to store the previous data values of the snake's tail, and then we can make a flag to check if the snake is moving only one square at a time by referencing two values in the array that are one index apart, 
     //subtracting them
 }
