@@ -1,59 +1,65 @@
 #include <stdio.h> // gcc snake.c -o snake -lncurses
 #include <stdlib.h>
 #include <ncurses.h> //remember to do -lncurses when compiling or running, i forgor which one :skull:
+#include <curses.h>
 
 
 
-#define width 20
-#define height 20
+
+//#define getmaxyx(win,y,x)	(y = getmaxy(win), x = getmaxx(win))
 
 
-int x, y, fruitx, fruity, gameOver;
+int cordX, cordY, fruitx, fruity, gameOver;
 int snakeTailX[100], snakeTailY[100];
 int snakeLen, snakeLenx, snakeLeny;
+int width = 20;
+int height = 20;
 
 char keyPressed;
+char storeKey;
 
 void setup()
 {     
     initscr();
     noecho();
+    
+    //getmaxyx(stdscr, height, width);
+
     snakeLen = 3;
-    x = width / 2; 
-    y = height / 2;
+    cordX = width / 2; 
+    cordY = height / 2;
     gameOver = 0; 
 }
 
 void draw(){ 
+
+    char grid[height][width];
     
-    char grid[width][height];
-    
-    for (int i = 0; i < width; i++) // Row
+    for (int i = 0; i < height; i++) // Row
         {
-            for (int j = 0; j < height; j++) // Col
+            for (int j = 0; j < width; j++) // Col
             {
                 grid[i][j] = '.'; 
                 
-                if(i == 0 || i == width - 1){ 
+                if(i == 0 || i == height - 1){ 
                     grid[i][j] = '-';
                 }
 
-                if(j == 0 || j == height - 1){ 
+                if(j == 0 || j == width - 1){ 
                     grid[i][j] = '|';
                 }
 
-                if(i == x && j == y){ 
-                    grid[i][j] = 'O'; //
+                if(i == cordY && j == cordX){ 
+                    grid[i][j] = 'O';
                 }
             }
         }
  
-    for (int i = 0; i < width; i++)
+    for (int i = 0; i < height; i++)
         {
-           for (int j = 0; j < height; j++)
+           for (int j = 0; j < width; j++)
                {
                     mvaddch(i, j, grid[i][j]);
-                    refresh();
                }
         }
 }
@@ -64,38 +70,63 @@ void input()
     switch(keyPressed)
     {
         case 'w':   
-            
+            storeKey = 'w';
             break;
         case 'a':
-            
+            storeKey = 'a';
             break;
         case 's':
-            
+            storeKey = 's';
             break;
         case 'd':
-            
+            storeKey = 'd';
             break;
         default: 
             break;
     }
 }
 
-void logic() //this function is mainly meant to store the current location of the snake's head and tail in the corresponding arrays, and then update their locations 
+void logic()
 {
-    int prevX = snakeTailX[0];
-    int prevY = snakeTailY[0];
-    int prev2X, prev2Y;
-    snakeTailX[0] = x;
-    snakeTailY[0] = y;
-    
-    for (int i = 1; i < snakeLen; i++) {
-        prev2X = snakeTailX[i];
-        prev2Y = snakeTailY[i];
-        snakeTailX[i] = prevX;
-        snakeTailY[i] = prevY;
-        prevX = prev2X;
-        prevY = prev2Y;
+    switch(storeKey)
+    {
+        case 'w':   
+            cordY--;
+            break;
+        case 'a':
+            cordX--;
+            break;
+        case 's':
+            cordY++;
+            break;
+        case 'd':
+            cordX++;
+            break;
+        default: 
+            break; 
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    // int prevX = snakeTailX[0];
+    // int prevY = snakeTailY[0];
+    // int prev2X, prev2Y;
+    // snakeTailX[0] = cordX;
+    // snakeTailY[0] = cordY;
+    
+    // for (int i = 1; i < snakeLen; i++) {
+    //     prev2X = snakeTailX[i];
+    //     prev2Y = snakeTailY[i];
+    //     snakeTailX[i] = prevX;
+    //     snakeTailY[i] = prevY;
+    //     prevX = prev2X;
+    //     prevY = prev2Y;
+    // }
 }
 
 
@@ -108,7 +139,7 @@ int main(int argc, char* argv[]){
     setup();
     
     while(!gameOver){
-        //logic();
+        logic();
         input(); 
         draw();
     }
