@@ -3,11 +3,7 @@
 #include <ncurses.h> //remember to do -lncurses when compiling or running, i forgor which one :skull:
 #include <curses.h>
 
-
-
-
 //#define getmaxyx(win,y,x)	(y = getmaxy(win), x = getmaxx(win))
-
 
 int cordX, cordY, fruitx, fruity, gameOver;
 int snakeTailX[100], snakeTailY[100];
@@ -21,7 +17,7 @@ char storeKey;
 void setup()
 {     
     initscr();
-    noecho();
+    noecho(); 
     
     //getmaxyx(stdscr, height, width);
 
@@ -107,12 +103,6 @@ void logic()
     }
     
     
-    
-    
-    
-    
-    
-    
     // int prevX = snakeTailX[0];
     // int prevY = snakeTailY[0];
     // int prev2X, prev2Y;
@@ -129,8 +119,6 @@ void logic()
     // }
 }
 
-
-    
 //use array to store the previous data values of the snake's tail, and then we can make a flag to check if the snake is moving only one square at a time by referencing two values in the array that are one index apart, 
     //subtracting them
 
@@ -143,4 +131,6 @@ int main(int argc, char* argv[]){
         input(); 
         draw();
     }
+
+    
 }
