@@ -39,14 +39,21 @@ void draw(){
                 
                 if(i == 0 || i == height - 1){ 
                     grid[i][j] = '-';
-                }
-
-                if(j == 0 || j == width - 1){ 
+                }else if(j == 0 || j == width - 1){ 
                     grid[i][j] = '|';
+                }else if(i == cordY && j == cordX){ 
+                    grid[i][j] = 'O';
+                }else{
+                for(int k = 0; k < snakeLen; k++){
+                    if((snakeTailX[k] == j) && (snakeTailY[k] == i)){
+                        grid[i][j] = 'o';
+                        
+                    }
+
                 }
 
-                if(i == cordY && j == cordX){ 
-                    grid[i][j] = 'O';
+
+                    
                 }
             }
         }
@@ -101,7 +108,7 @@ void logic()
         default: 
             break; 
     }
-    
+    //refresh()
     
     // int prevX = snakeTailX[0];
     // int prevY = snakeTailY[0];
