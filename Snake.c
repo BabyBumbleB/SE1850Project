@@ -10,7 +10,7 @@ int snakeTailX[100], snakeTailY[100];
 int snakeLen, snakeLenx, snakeLeny;
 int width = 20;
 int height = 20;
-
+int score = 0;
 char keyPressed;
 char storeKey;
 
@@ -25,6 +25,9 @@ void setup()
     cordX = width / 2; 
     cordY = height / 2;
     gameOver = 0; 
+
+    fruitx = rand() % (width - 1) + 1;
+    fruity = rand() % (height - 1) + 1;
 }
 
 void draw(){ 
@@ -91,6 +94,21 @@ void input()
 
 void logic()
 {
+
+        int prevX = snakeTailX[0];
+    int prevY = snakeTailY[0];
+    int prev2X, prev2Y;
+    snakeTailX[0] = cordX;
+    snakeTailY[0] = cordY;
+    
+    for (int i = 1; i < snakeLen; i++) {
+        prev2X = snakeTailX[i];
+        prev2Y = snakeTailY[i];
+        snakeTailX[i] = prevX;
+        snakeTailY[i] = prevY;
+        prevX = prev2X;
+        prevY = prev2Y;
+    }
     switch(storeKey)
     {
         case 'w':   
@@ -109,35 +127,37 @@ void logic()
             break; 
     }
     //refresh()
+
+    if(cordX < 0 || cordX >= width || cordY < 0 || cordY >= height){
+        gameOver = 1;
+    }
     
-    // int prevX = snakeTailX[0];
-    // int prevY = snakeTailY[0];
-    // int prev2X, prev2Y;
-    // snakeTailX[0] = cordX;
-    // snakeTailY[0] = cordY;
+for (int i = 0; i < snakeLen; i++) {
+        if ((snakeTailX[i] == cordX) && (snakeTailY[i] == cordY))
+            gameOver = 1;
+    }
+
+if((cordX == fruitx) && (cordY == fruity)){
+fruitx = rand() % (width - 1) + 1;
+fruity = rand() % (height - 1) + 1;
+score += 100;
+snakeLen++;
+}
     
-    // for (int i = 1; i < snakeLen; i++) {
-    //     prev2X = snakeTailX[i];
-    //     prev2Y = snakeTailY[i];
-    //     snakeTailX[i] = prevX;
-    //     snakeTailY[i] = prevY;
-    //     prevX = prev2X;
-    //     prevY = prev2Y;
-    // }
 }
 
 //use array to store the previous data values of the snake's tail, and then we can make a flag to check if the snake is moving only one square at a time by referencing two values in the array that are one index apart, 
     //subtracting them
 
-//include a score system, maybe add 10 points for each fruit.
+
 int main(int argc, char* argv[]){
     setup();
     
-    while(!gameOver){
-        logic();
-        input(); 
+    while(!gameOver){ //leave these in this order
         draw();
+        input(); 
+        logic();
     }
-
-    
+endwin(); //this fixes a bug that didnt let me type in the terminal once the game ended
+    return 0;
 }
