@@ -22,11 +22,11 @@ void setup()
     //getmaxyx(stdscr, height, width);
 
     snakeLen = 3;
-    cordX = width / 2; 
+    cordX = width / 2; //starting coords of snake head
     cordY = height / 2;
     gameOver = 0; 
 
-    fruitx = rand() % (width - 1) + 1;
+    fruitx = rand() % (width - 1) + 1; //this makes sure the fruit can only spawn withinn the 2d array
     fruity = rand() % (height - 1) + 1;
 }
 
@@ -41,15 +41,15 @@ void draw(){
                 grid[i][j] = '.'; 
                 
                 if(i == 0 || i == height - 1){ 
-                    grid[i][j] = '-';
+                    grid[i][j] = '-'; //top of grid
                 }else if(j == 0 || j == width - 1){ 
-                    grid[i][j] = '|';
+                    grid[i][j] = '|'; //side walls of grid
                 }else if(i == cordY && j == cordX){ 
-                    grid[i][j] = 'O';
+                    grid[i][j] = 'O'; //snake head
                 }else{
                 for(int k = 0; k < snakeLen; k++){
                     if((snakeTailX[k] == j) && (snakeTailY[k] == i)){
-                        grid[i][j] = 'o';
+                        grid[i][j] = 'o'; //snake body
                         
                     }
 
@@ -73,7 +73,7 @@ void draw(){
 void input()
 {
     keyPressed = getch();
-    switch(keyPressed)
+    switch(keyPressed) //getting input from user and storing it
     {
         case 'w':   
             storeKey = 'w';
@@ -109,7 +109,7 @@ void logic()
         prevX = prev2X;
         prevY = prev2Y;
     }
-    switch(storeKey)
+    switch(storeKey) //actually making the snake move based off of user input
     {
         case 'w':   
             cordY--;
@@ -129,18 +129,18 @@ void logic()
     //refresh()
 
     if(cordX < 0 || cordX >= width || cordY < 0 || cordY >= height){
-        gameOver = 1;
+        gameOver = 1; //if snake leaves the parameters, gameover. 
     }
     
 for (int i = 0; i < snakeLen; i++) {
         if ((snakeTailX[i] == cordX) && (snakeTailY[i] == cordY))
-            gameOver = 1;
+            gameOver = 1; //if the snake collides with its body, gameover
     }
 
 if((cordX == fruitx) && (cordY == fruity)){
-fruitx = rand() % (width - 1) + 1;
+fruitx = rand() % (width - 1) + 1; //randomizing the location spawns of the fruit
 fruity = rand() % (height - 1) + 1;
-score += 100;
+score += 100; //just random score incrementation based on when it touched a fruit
 snakeLen++;
 }
     
@@ -148,7 +148,6 @@ snakeLen++;
 
 //use array to store the previous data values of the snake's tail, and then we can make a flag to check if the snake is moving only one square at a time by referencing two values in the array that are one index apart, 
     //subtracting them
-
 
 int main(int argc, char* argv[]){
     setup();
