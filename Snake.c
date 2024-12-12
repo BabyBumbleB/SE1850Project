@@ -24,9 +24,9 @@ void setup()
     cordX = width / 2; //starting coords of snake head
     cordY = height / 2;
     gameOver = 0; 
-
-    fruitx = srand(time(NULL)) % (width - 1) + 1; //this makes sure the fruit can only spawn withinn the 2d array
-    fruity = srand(time(NULL)) % (height - 1) + 1;
+    srand(time(NULL));
+    fruitx = rand() % (width - 1) + 1; //this makes sure the fruit can only spawn withinn the 2d array
+    fruity = rand() % (height - 1) + 1;
 }
 
 void draw(){ 
