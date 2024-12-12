@@ -3,6 +3,7 @@
 #include <ncurses.h> //remember to do -lncurses when compiling 
 #include <curses.h>
 #include <unistd.h>
+#include <time.h>
 
 int cordX, cordY, fruitx, fruity, gameOver;
 int snakeTailX[100], snakeTailY[100];
@@ -24,8 +25,8 @@ void setup()
     cordY = height / 2;
     gameOver = 0; 
 
-    fruitx = rand() % (width - 1) + 1; //this makes sure the fruit can only spawn withinn the 2d array
-    fruity = rand() % (height - 1) + 1;
+    fruitx = srand(time(NULL)) % (width - 1) + 1; //this makes sure the fruit can only spawn withinn the 2d array
+    fruity = srand(time(NULL)) % (height - 1) + 1;
 }
 
 void draw(){ 
@@ -130,14 +131,14 @@ void logic()
     if((cordX == fruitx) && (cordY == fruity)){
         fruitx = rand() % (width - 1) + 1; //randomizing the location spawns of the fruit
         fruity = rand() % (height - 1) + 1;
-        score += 100; //just random score incrementation based on when it touched a fruit
+        score += 100; //just a random score incrementation based on when it touched a fruit
         snakeLen++;
+    }
+    if(score == 1000){
+
     }
     
 }
-
-//use array to store the previous data values of the snake's tail, and then we can make a flag to check if the snake is moving only one square at a time by referencing two values in the array that are one index apart, 
-    //subtracting them
 
 int main(int argc, char* argv[]){
     
