@@ -1,6 +1,6 @@
-#include <stdio.h> // gcc snake.c -o snake -lncurses
+#include <stdio.h> //gcc snake.c -o snake -lncurses 
 #include <stdlib.h>
-#include <ncurses.h> //remember to do -lncurses when compiling or running, i forgor which one :skull:
+#include <ncurses.h> //remember to do -lncurses when compiling 
 #include <curses.h>
 #include <unistd.h>
 
@@ -148,7 +148,9 @@ int main(int argc, char* argv[]){
         logic();
         halfdelay(1);
     }
-    
+    if(gameOver == 1){
+    printf("Game over! The final score was %d\n", score);
+    }
     endwin(); //this fixes a bug that didnt let me type in the terminal once the game ended
     return 0;
 }
