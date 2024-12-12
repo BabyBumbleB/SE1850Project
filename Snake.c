@@ -149,10 +149,10 @@ int main(int argc, char* argv[]){
         logic();
         halfdelay(3);
            if(gameOver == 1){
-              printf("\nGame over! The final score was %d points\n", score);
-               printf("try again? (1 = yes, 2 = no)");
-                   scanf("%d", &redo);
-                   if(redo == 1){
+              mvprintw(height + 2, 0, "\nGame over! The final score was %d points\n", score);
+               mvprintw(height + 3, 0, "try again? (y = yes, n = no)");
+                   getch("%d", &redo);
+                   if(redo == 'y'){
                     gameOver = 0;
                        score = 0; 
                    }else{
