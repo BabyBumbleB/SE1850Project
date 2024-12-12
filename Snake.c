@@ -13,6 +13,7 @@ int height = 20;
 int score = 0;
 int keyPressed;
 int storeKey;
+int redo;
 
 void setup()
 {     
@@ -141,8 +142,27 @@ void logic()
 }
 
 int main(int argc, char* argv[]){
+     setup();
+    while(1){ //leave these in this order
+        draw();
+        input(); 
+        logic();
+        halfdelay(3);
+           if(gameOver == 1){
+              printf("\nGame over! The final score was %d points\n", score);
+               printf("try again? (1 = yes, 2 = no);
+                   scanf("%d", &redo);
+                   if(redo == 1){
+                    gameOver = 0;
+                       score = 0; 
+                   }
+          }
+    }
     
-    setup();
+    endwin(); //this fixes a bug that didnt let me type in the terminal once the game ended
+    return 0;
+}
+    /*setup();
     while(!gameOver){ //leave these in this order
         draw();
         input(); 
@@ -155,3 +175,4 @@ int main(int argc, char* argv[]){
     endwin(); //this fixes a bug that didnt let me type in the terminal once the game ended
     return 0;
 }
+*/
