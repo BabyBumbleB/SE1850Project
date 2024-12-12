@@ -151,7 +151,7 @@ int main(int argc, char* argv[]){
            if(gameOver == 1){
               mvprintw(height + 2, 0, "\nGame over! The final score was %d points\n", score);
                mvprintw(height + 3, 0, "try again? (y = yes, n = no)");
-                   getch("%d", &redo);
+                   getch();
                    if(redo == 'y'){
                     gameOver = 0;
                        score = 0; 
