@@ -149,7 +149,7 @@ int main(int argc, char* argv[]){
         halfdelay(1);
     }
     if(gameOver == 1){
-    printf("Game over! The final score was %d\n", score);
+    printf("\nGame over! The final score was %d points\n", score);
     }
     endwin(); //this fixes a bug that didnt let me type in the terminal once the game ended
     return 0;
