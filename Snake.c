@@ -8,8 +8,8 @@
 int cordX, cordY, fruitx, fruity, gameOver;
 int snakeTailX[100], snakeTailY[100];
 int snakeLen, snakeLenx, snakeLeny;
-int width = 20;
-int height = 20;
+int width = 10;
+int height = 10;
 int score = 0;
 int keyPressed;
 int storeKey;
@@ -26,8 +26,8 @@ void setup()
     cordY = height / 2;
     gameOver = 0; 
     srand(time(NULL));
-    fruitx = rand() % (width - 1) + 1; //this makes sure the fruit can only spawn withinn the 2d array
-    fruity = rand() % (height - 1) + 1;
+    fruitx = rand() % (width - 2) + 1; //this makes sure the fruit can only spawn within the 2d array
+    fruity = rand() % (height - 2) + 1;
 }
 
 void draw(){ 
@@ -35,38 +35,36 @@ void draw(){
     char grid[height][width];
     
     for (int i = 0; i < height; i++) // Row
+    {
+        for (int j = 0; j < width; j++) // Col
         {
-            for (int j = 0; j < width; j++) // Col
-            {
-                grid[i][j] = '.'; 
-                
-                if(i == 0 || i == height - 1){ 
-                    grid[i][j] = '-'; // Top and Bottom Grid
-                }else if(j == 0 || j == width - 1){ 
-                    grid[i][j] = '|'; // Side walls of Grid
-                }else if(i == cordY && j == cordX){ 
-                    grid[i][j] = 'O'; // Snake head
-                }else if(i == fruity && j == fruitx){ 
-                    grid[i][j] = '*';
-                }else{
-                    for(int k = 0; k < snakeLen; k++){
-                        if((snakeTailX[k] == j) && (snakeTailY[k] == i)){
-                            grid[i][j] = 'o'; // Snake body
-                            
-                        }
-
-                    }   
-                }
+            grid[i][j] = '.'; 
+            
+            if(i == 0 || i == height - 1){ 
+                grid[i][j] = '-'; // Top and Bottom Grid
+            }else if(j == 0 || j == width - 1){ 
+                grid[i][j] = '|'; // Side walls of Grid
+            }else if(i == cordY && j == cordX){ 
+                grid[i][j] = 'O'; // Snake head
+            }else if(i == fruity && j == fruitx){ 
+                grid[i][j] = '*';
+            }else{
+                for(int k = 0; k < snakeLen; k++){
+                    if((snakeTailX[k] == j) && (snakeTailY[k] == i)){
+                        grid[i][j] = 'o'; // Snake body
+                    }
+                }   
             }
         }
- 
+    }
+
     for (int i = 0; i < height; i++)
+    {
+        for (int j = 0; j < width; j++)
         {
-           for (int j = 0; j < width; j++)
-               {
-                    mvaddch(i, j, grid[i][j]);
-               }
+            mvaddch(i, j, grid[i][j]);
         }
+    }
     mvprintw(height, 0, "Score : %d", score);
     mvprintw(height + 1, 0, "Created by Haden and Ben");
 }
@@ -109,7 +107,6 @@ void logic()
         prevY = prev2Y;
     }
     
-    
     switch(storeKey) //actually making the snake move based off of user input
     {
         case 1: cordY--; break;
@@ -119,7 +116,6 @@ void logic()
         default: break;
     } 
     
-
     if(cordX < 1 || cordX >= (width - 1) || cordY < 1 || cordY >= (height - 1)){
         gameOver = 1; //if snake leaves the parameters, gameover. 
     }
@@ -130,51 +126,46 @@ void logic()
     }
 
     if((cordX == fruitx) && (cordY == fruity)){
-        fruitx = rand() % (width - 1) + 1; //randomizing the location spawns of the fruit
-        fruity = rand() % (height - 1) + 1;
+        fruitx = rand() % (width - 2) + 1; //randomizing the location spawns of the fruit
+        fruity = rand() % (height - 2) + 1;
         score += 100; //just a random score incrementation based on when it touched a fruit
         snakeLen++;
     }
-    if(score == 1000){
-
+    if(snakeLen == 63){
+        mvprintw(height + 2, 0, "Congrats! You ate all of the apples.");
+        gameOver = 1;
     }
-    
 }
 
 int main(int argc, char* argv[]){
-     setup();
+    setup();
     while(1){ //leave these in this order
         draw();
         input(); 
         logic();
         halfdelay(3);
-           if(gameOver == 1){
-              mvprintw(height + 2, 0, "\nGame over! The final score was %d points\n", score);
-               mvprintw(height + 3, 0, "try again? (y = yes, n = no)");
-                   getch();
-                   if(redo == 'y'){
-                    gameOver = 0;
-                       score = 0; 
-                   }else{
-                       break;
-                   }
-          }
+        if(gameOver == 1){
+            halfdelay(100);
+            mvprintw(height + 2, 0, "\nGame over! The final score was %d points\n", score);
+            mvprintw(height + 4, 0, "try again? (y = yes, n = no)");
+
+            redo = getch();
+            if(redo == 'y'){
+                // Reset game state
+                gameOver = 0;
+                score = 0;
+                snakeLen = 3;
+                cordX = width / 2;
+                cordY = height / 2;
+                fruitx = rand() % (width - 2) + 1;
+                fruity = rand() % (height - 2) + 1;
+                storeKey = 0; // Reset movement direction
+            } else {
+                break;
+            }
+        }
     }
     
-    endwin(); //this fixes a bug that didnt let me type in the terminal once the game ended
+    endwin(); //this fixes a bug that didn't let me type in the terminal once the game ended
     return 0;
 }
-    /*setup();
-    while(!gameOver){ //leave these in this order
-        draw();
-        input(); 
-        logic();
-        halfdelay(1);
-    }
-    if(gameOver == 1){
-    printf("\nGame over! The final score was %d points\n", score);
-    }
-    endwin(); //this fixes a bug that didnt let me type in the terminal once the game ended
-    return 0;
-}
-*/
