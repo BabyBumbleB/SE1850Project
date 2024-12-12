@@ -150,11 +150,13 @@ int main(int argc, char* argv[]){
         halfdelay(3);
            if(gameOver == 1){
               printf("\nGame over! The final score was %d points\n", score);
-               printf("try again? (1 = yes, 2 = no);
+               printf("try again? (1 = yes, 2 = no)");
                    scanf("%d", &redo);
                    if(redo == 1){
                     gameOver = 0;
                        score = 0; 
+                   }else{
+                       break;
                    }
           }
     }
