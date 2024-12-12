@@ -118,7 +118,7 @@ void logic()
     } 
     
 
-    if(cordX < 0 || cordX >= width || cordY < 0 || cordY >= height){
+    if(cordX < 1 || cordX >= (width - 1) || cordY < 1 || cordY >= (height - 1)){
         gameOver = 1; //if snake leaves the parameters, gameover. 
     }
     
